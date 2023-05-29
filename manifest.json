@@ -1,18 +1,27 @@
 {
-    "manifest_version": 1,
-    "name": "ExamplePlugin",
-    "slug": "example-plugin",
-    "version": "0.1.0",
-    "author": "Author",
-    "description": "Description of the plugin", 
-    "betterncm_version": "^0.2.6",
-    "preview": "preview.png", 
-    
-    "injects": {
-        "Main": [ 
-            {
-                "file": "main.js" 
-            }
-        ]
+  "manifest_version": 1,
+  "name": "THBSongInfo",
+  "slug": "thb-songInfo",
+  "version": "0.1.0",
+  "author": "SawashiroAlice",
+  "description": "从THBWiki获得东方曲目信息与歌词",
+  "betterncm_version": ">=1.0.0",
+
+  "injects": {
+    "Main": [
+      {
+        "file": "main.js"
+      }
+    ]
+  },
+  "loadBefore":["RefinedNowPlaying"],
+  "hijacks": {
+    ">= 2.10.4": {
+      "orpheus://orpheus/pub/core": {
+        "type": "replace",
+        "from": "function(t,i,e,r,n,a){var o;if(((this.U()||C).from||C).id==t)",
+        "to": "async function(t,i,e,r,n,a){;i='online';window.onProcessLyrics&&(a=(await onProcessLyrics(a,e)));var o;if(((this.U()||C).from||C).id==t)"
+      }
     }
+  }
 }
